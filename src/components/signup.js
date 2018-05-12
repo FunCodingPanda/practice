@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import '../styles/Navbar.css';
 
-class signup extends Component {
+class Signup extends Component {
   constructor(props){
     super(props);
     this.inputName = React.createRef();
     this.inputEmail = React.createRef();
     this.inputPassword = React.createRef();
     this.inputConfirmPassword = React.createRef();
+
     this.submitForm = this.submitForm.bind(this);
   }
 
@@ -25,6 +26,13 @@ class signup extends Component {
     };
 
     axios.post('http://localhost:3000/users', data)
+      .then(response => {
+        if (response.status === 201 && response.data.auth) {
+          localStorage.setItem('auth', JSON.stringify(response.data.auth));
+          localStorage.setItem('userId', response.data.user.id);
+        }
+        window.location.assign('./account');
+      });
   }
 
   render () {
@@ -55,14 +63,14 @@ class signup extends Component {
       <div className="field">
         <label className="label">Password</label>
         <div className="control">
-          <input ref={this.inputPassword} className="input" type="text" placeholder="Text input" />
+          <input ref={this.inputPassword} className="input" type="password" placeholder="Text input" />
         </div>
       </div>
 
       <div className="field">
         <label className="label">Confirm Password</label>
         <div className="control">
-          <input ref={this.inputConfirmPassword} className="input" type="text" placeholder="Text input" />
+          <input ref={this.inputConfirmPassword} className="input" type="password" placeholder="Text input" />
         </div>
       </div>
 
@@ -79,4 +87,4 @@ class signup extends Component {
   }
 }
 
-export default signup;
+export default Signup;

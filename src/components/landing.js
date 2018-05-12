@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../styles/landing.css';
 
-class landing extends Component {
+class Landing extends Component {
   render () {
     return (
       <div className='carousel carousel-animated carousel-animate-slide' data-autoplay="true">
@@ -32,9 +32,8 @@ class landing extends Component {
           </div>
         </div>
       </div>
-
     )
   }
 }
 
-export default landing;
+export default Landing;

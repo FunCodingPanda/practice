@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../styles/Navbar.css';
 
-class login extends Component {
+class Login extends Component {
   render () {
     return (
       <div class="field">
@@ -34,4 +34,4 @@ class login extends Component {
   }
 }
 
-export default login;
+export default Login;

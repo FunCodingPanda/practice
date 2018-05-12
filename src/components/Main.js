@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import landing from './landing'
-import signup from './signup'
+import Landing from './Landing'
+import Signup from './Signup'
 
 // The Main component renders one of the three provided
 // Routes (provided that one matches). Both the /roster
@@ -11,8 +11,8 @@ import signup from './signup'
 const Main = () => (
   <div>
     <Switch>
-      <Route exact path='/' component={landing}/>
-      <Route exact path='/signup' component={signup}/>
+      <Route exact path='/' component={Landing}/>
+      <Route exact path='/signup' component={Signup}/>
     </Switch>
   </div>
 )

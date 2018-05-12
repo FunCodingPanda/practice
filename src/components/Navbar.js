@@ -1,7 +1,30 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 import '../styles/Navbar.css';
 
 class Navbar extends Component {
+  constructor(props) {
+    super(props);
+    const userId = localStorage.getItem('userId');
+    this.state = {
+      userId
+    }
+  }
+  componentDidMount() {
+    if (this.state.userId) {
+      axios.get(`http://localhost:3000/users/${this.state.userId}`).then(response => {
+        this.setState({
+          user: response.data
+        });
+      });
+    }
+  }
+  logout() {
+    localStorage.removeItem('auth');
+    localStorage.removeItem('userId');
+    window.location.assign('./');
+  }
   render() {
     return (
       <nav className="navbar is-transparent">
@@ -19,25 +42,36 @@ class Navbar extends Component {
         <div id="navbar-header" className="navbar-menu">
           <div className="navbar-start">
             <h4 id='title'> SMART INVESTING </h4>
-            <a className="navbar-item" href="/">
+            <Link to="/" className="navbar-item">
               Home
-            </a>
-            <a className="navbar-item" href="/">
+            </Link>
+            <Link to="/about" className="navbar-item">
               About
-            </a>
-            <a className="navbar-item" href="/">
-              Sign Up
-            </a>
-            <a className="navbar-item" href="/">
-              Login
-            </a>
-            <a className="navbar-item" href="/">
-              Log Out
-            </a>
-            <a className="navbar-item" href="/">
+            </Link>
+            {
+              !this.state.user && <Link to="/signup" className="navbar-item">
+                Sign Up
+              </Link>
+            }
+            {
+              !this.state.user && <Link to="/login" className="navbar-item">
+                Login
+              </Link>
+            }
+            {
+              this.state.user && <a onClick={this.logout} className="navbar-item">
+                Log Out
+              </a>
+            }
+            <Link to="/account" className="navbar-item">
               My Account
-            </a>
-           <button className="button is-rounded ebutton">Available Companies</button>
+            </Link>
+          </div>
+          <div className="navbar-end">
+            <span className="navbar-item">
+              { this.state.user && `Welcome, ${this.state.user.name}` }
+            </span>
+            <button className="button is-rounded ebutton">Available Companies</button>
           </div>
         </div>
       </nav>
