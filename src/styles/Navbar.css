@@ -1,8 +1,15 @@
-.Navbar {
-
-}
-
 #title {
   padding: 20px;
-  font-weight: 500;
+  font-weight: 670;
+  margin: 10px;
 }
+
+.ebutton {
+  margin: 20px;
+  position: absolute; right: 0;
+}
+
+#logo {
+  margin-left: 50px;
+}
+

@@ -7,9 +7,9 @@ class Navbar extends Component {
       <nav className="navbar is-transparent">
         <div className="navbar-brand">
           <a className="navbar-item" href="/">
-            <img src="./l.png" width="50" height="80" />
+            <img id="logo" src="logo2.jpg" width="40" height="55"/>
           </a>
-          <div className="navbar-burger burger" dataTarget="navbar-header">
+          <div className="navbar-burger burger" data-target="navbar-header">
             <span></span>
             <span></span>
             <span></span>
@@ -23,6 +23,9 @@ class Navbar extends Component {
               Home
             </a>
             <a className="navbar-item" href="/">
+              About
+            </a>
+            <a className="navbar-item" href="/">
               Sign Up
             </a>
             <a className="navbar-item" href="/">
@@ -34,6 +37,7 @@ class Navbar extends Component {
             <a className="navbar-item" href="/">
               My Account
             </a>
+           <button className="button is-rounded ebutton">Available Companies</button>
           </div>
         </div>
       </nav>
