@@ -79,7 +79,7 @@ class Login extends Component {
 
         <div className="field">
           <p className="control">
-            <button onClick={this.loginButton} className="button is-success">
+            <button onClick={this.loginButton} className="button is-success is-rounded">
               Login
             </button>
           </p>

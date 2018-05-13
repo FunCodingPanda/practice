@@ -108,7 +108,7 @@ class Signup extends Component {
 
       <div className="field is-grouped">
         <div className="control">
-          <button onClick={this.submitForm} className="button is-link">Submit</button>
+          <button onClick={this.submitForm} className="button is-link is-rounded">Submit</button>
         </div>
         <div className="control">
           <button className="button is-text">Cancel</button>
