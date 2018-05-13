@@ -12,3 +12,13 @@
   margin-left: 50px;
 }
 
+.authContainer {
+  padding: 50px 350px;
+}
+
+.navbarHeader {
+  font-weight: 500;
+  font-size: 35px;
+  margin-bottom: 10px;
+  text-align: left;
+}

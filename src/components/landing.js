@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
+import bulmaCarousel from '../../node_modules/bulma-extensions/bulma-carousel/dist/bulma-carousel';
 import '../styles/landing.css';
 
 class Landing extends Component {
+  componentDidMount() {
+    bulmaCarousel.attach();
+  }
   render () {
     return (
       <div className='carousel carousel-animated carousel-animate-slide' data-autoplay="true">

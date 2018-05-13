@@ -5,12 +5,16 @@ import '../styles/Navbar.css';
 class Signup extends Component {
   constructor(props){
     super(props);
+    this.state = {
+      errors: null
+    };
     this.inputName = React.createRef();
     this.inputEmail = React.createRef();
     this.inputPassword = React.createRef();
     this.inputConfirmPassword = React.createRef();
 
     this.submitForm = this.submitForm.bind(this);
+    this.validateEmail = this.validateEmail.bind(this);
   }
 
   submitForm(e){
@@ -35,9 +39,32 @@ class Signup extends Component {
       });
   }
 
+  validateEmail() {
+    const email = this.inputEmail.current.value;
+    if (!email.match(/\w+[\w-\.]*\@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/gm)) {
+      this.setState({
+        errors: {
+          email: 'This email is invalid'
+        }
+      })
+    } else {
+      this.setState({
+        errors: {
+          email: ''
+        }
+      })
+    }
+  }
+
   render () {
+    let emailError = '', emailClass = '';
+    if (this.state.errors && this.state.errors.email) {
+      emailError = this.state.errors.email;
+      emailClass = 'is-danger';
+    }
     return (
-      <div>
+      <div className='authContainer'>
+        <h1 className='navbarHeader'> Signup </h1>
         <div className="field">
           <label className="label">Name</label>
           <div className="control">
@@ -48,7 +75,12 @@ class Signup extends Component {
         <div className="field">
           <label className="label">Email</label>
           <div className="control has-icons-left has-icons-right">
-            <input ref={this.inputEmail} className="input is-danger" type="email" placeholder="Email input" />
+            <input
+              ref={this.inputEmail}
+              className={`input ${emailClass}`}
+              type="email"
+              placeholder="Email input"
+              onBlur={this.validateEmail} />
             <span className="icon is-small is-left">
               <i className="fas fa-envelope"></i>
             </span>
@@ -56,7 +88,7 @@ class Signup extends Component {
               <i className="fas fa-exclamation-triangle"></i>
             </span>
           </div>
-          <p className="help is-danger">This email is invalid</p>
+          { emailError && <p className="help is-danger">{ emailError }</p> }
         </div>
      
 

@@ -11,6 +11,7 @@ class Navbar extends Component {
       userId
     }
   }
+
   componentDidMount() {
     if (this.state.userId) {
       axios.get(`http://localhost:3000/users/${this.state.userId}`).then(response => {
@@ -20,11 +21,13 @@ class Navbar extends Component {
       });
     }
   }
+  
   logout() {
     localStorage.removeItem('auth');
     localStorage.removeItem('userId');
     window.location.assign('./');
   }
+
   render() {
     return (
       <nav className="navbar is-transparent">
@@ -71,7 +74,9 @@ class Navbar extends Component {
             <span className="navbar-item">
               { this.state.user && `Welcome, ${this.state.user.name}` }
             </span>
-            <button className="button is-rounded ebutton">Available Companies</button>
+            <Link to="/AllCompanies">
+              <button className="button is-rounded ebutton">Available Companies</button>
+            </Link>
           </div>
         </div>
       </nav>
