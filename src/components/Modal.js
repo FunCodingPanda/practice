@@ -37,7 +37,7 @@ class Modal extends Component {
             </header>
             <section className="modal-card-body">
               <p><b>Ticker Symbol :</b> { symbol }</p> 
-              <p><b>Latest Price :</b> { latestPrice }</p>
+              <p><b>Latest Price :</b> { latestPrice } USD</p>
               <p><b>Amount of Shares:</b> 
                 <input 
                   className="input" 
@@ -47,7 +47,7 @@ class Modal extends Component {
                   ref={this.inputShares}
                 />
               </p>
-              { this.state.total && <p><b>Total:</b> { this.state.total }</p> }
+              { this.state.total && <p><b>Total:</b> { this.state.total } USD</p> }
             </section>
             <footer className="modal-card-foot">
               <button className="button is-success is-rounded">Buy</button>
