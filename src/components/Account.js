@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Modal from './Modal'
+import ModalSell from './sellModal'
 import '../styles/Account.css'
 
 
@@ -10,12 +11,14 @@ class Account extends Component {
     super(props);
     this.state = {
       company: null,
-      buyModalActive: false
+      buyModalActive: false,
+      sellModalActive: false
     };
     this.inputCompany = React.createRef()
     this.search = this.search.bind(this);
     this.openBuyModal = this.openBuyModal.bind(this);
     this.closeBuyModal = this.closeBuyModal.bind(this);
+    this.openSellModal = this.openSellModal.bind(this);
   }
   search(e) {
     e.preventDefault();
@@ -41,7 +44,21 @@ class Account extends Component {
     const symbol = this.inputCompany.current.value;
     if (symbol) {
       this.setState({
-        buyModalActive: true
+        buyModalActive: true,
+        sellModalActive: true
+      })
+    }
+  }
+
+  openSellModal(e) {
+    e.preventDefault();
+
+
+    const symbol = this.inputCompany.current.value;
+    if (symbol) {
+      this.setState ({
+        buyModalActice: true,
+        sellModalActive: true
       })
     }
   }
@@ -50,9 +67,11 @@ class Account extends Component {
     e.preventDefault();
 
     this.setState({
-      buyModalActive: false
+      buyModalActive: false,
+      sellModalActive: false
     })
   }
+
 
   render () {
     let holdings = 20000 
@@ -80,7 +99,10 @@ class Account extends Component {
             <button className="button is-success is-rounded accountButtons" onClick={this.openBuyModal}>
               Buy
             </button>
-            <button className="button is-danger is-rounded accountButtons">
+          </div>
+          <div>
+            <ModalSell active={this.state.sellModalActive} onClose={this.closeBuyModal} company={this.state.company} />
+            <button className="button is-danger is-rounded accountButtons" onClick={this.openSellModal}>
               Sell
             </button>
           </div>
@@ -90,7 +112,7 @@ class Account extends Component {
             <div id='searchedCompany'>
               <p><b>Company:</b> { this.state.company.companyName }</p>
               <p><b>Symbol:</b> { this.state.company.symbol }</p>
-              <p><b>Price:</b> { this.state.company.latestPrice } USD</p>
+              <p><b>Latest Price:</b> { this.state.company.latestPrice } USD</p>
               <p><b>Change from Previous Close:</b> { this.state.company.change } USD ({ (100 * this.state.company.changePercent).toFixed(2) }%)</p>
             </div>
         }

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../styles/modal.css';
 
-class Modal extends Component {
+class ModalSell extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -50,7 +50,7 @@ class Modal extends Component {
               { this.state.total && <p><b>Total:</b> { this.state.total } USD</p> }
             </section>
             <footer className="modal-card-foot">
-              <button className="button is-success is-rounded">Buy</button>
+              <button className="button is-danger is-rounded">Sell</button>
               <button className="button is-rounded" onClick={this.props.onClose}>Cancel</button>
             </footer>
           </div>
@@ -62,5 +62,4 @@ class Modal extends Component {
   }
 }
 
-export default Modal;
-
+export default ModalSell;

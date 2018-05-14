@@ -46,7 +46,7 @@ class AllCompanies extends Component {
             <div id='searchedCompany'>
               <p><b>Company:</b> { this.state.company.companyName }</p>
               <p><b>Symbol:</b> { this.state.company.symbol }</p>
-              <p><b>Price:</b> { this.state.company.latestPrice } USD</p>
+              <p><b>Latest Price:</b> { this.state.company.latestPrice } USD</p>
               <p><b>Change from Previous Close:</b> { this.state.company.change } USD ({ (100 * this.state.company.changePercent).toFixed(2) }%)</p>
             </div>
         }
