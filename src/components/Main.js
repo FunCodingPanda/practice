@@ -1,11 +1,11 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import Landing from './Landing'
-import Signup from './Signup'
-import Login from './Login'
 import About from './About'
-import AllCompanies from './AllCompanies'
 import Account from './Account'
+import AllCompanies from './AllCompanies'
+import Landing from './Landing'
+import Login from './Login'
+import Signup from './Signup'
 
 // The Main component renders one of the three provided
 // Routes (provided that one matches). Eg. Both the /roster

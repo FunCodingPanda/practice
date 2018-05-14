@@ -75,7 +75,7 @@ class Navbar extends Component {
               { this.state.user && `Welcome, ${this.state.user.name}` }
             </span>
             <Link to="/AllCompanies">
-              <button className="button is-rounded ebutton">Available Companies</button>
+              <button className="button is-rounded ebutton">Search Companies</button>
             </Link>
           </div>
         </div>
