@@ -6,6 +6,7 @@ import AllCompanies from './AllCompanies'
 import Landing from './Landing'
 import Login from './Login'
 import Signup from './Signup'
+import AccountHistory from './AccountHistory'
 
 // The Main component renders one of the three provided
 // Routes (provided that one matches). Eg. Both the /roster
@@ -21,6 +22,7 @@ const Main = () => (
       <Route exact path='/about' component={About}/>
       <Route exact path='/AllCompanies' component={AllCompanies}/>
       <Route exact path='/account' component={Account}/>
+      <Route exact path='/AccountHistory' component={AccountHistory}/>
     </Switch>
   </div>
 )

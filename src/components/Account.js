@@ -11,13 +11,14 @@ class Account extends Component {
     super(props);
     this.state = {
       company: null,
+      error: null,
       buyModalActive: false,
       sellModalActive: false
     };
     this.inputCompany = React.createRef()
     this.search = this.search.bind(this);
     this.openBuyModal = this.openBuyModal.bind(this);
-    this.closeBuyModal = this.closeBuyModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
     this.openSellModal = this.openSellModal.bind(this);
   }
   search(e) {
@@ -25,6 +26,9 @@ class Account extends Component {
 
     const symbol = this.inputCompany.current.value;
     if (symbol) {
+      this.setState({
+        error: null
+      })
       axios.get(`https://api.iextrading.com/1.0/stock/${symbol}/quote`)
         .then(response => {
           this.setState({
@@ -33,7 +37,8 @@ class Account extends Component {
         })
     } else {
       this.setState({
-        company: null
+        company: null,
+        error: null
       })
     }
   }
@@ -45,7 +50,11 @@ class Account extends Component {
     if (symbol) {
       this.setState({
         buyModalActive: true,
-        sellModalActive: true
+        sellModalActive: false
+      })
+    } else {
+      this.setState({
+        error: 'Please enter a stock symbol first!'
       })
     }
   }
@@ -57,13 +66,17 @@ class Account extends Component {
     const symbol = this.inputCompany.current.value;
     if (symbol) {
       this.setState ({
-        buyModalActice: true,
+        buyModalActice: false,
         sellModalActive: true
+      })
+    } else {
+      this.setState({
+        error: 'Please enter a stock symbol first!'
       })
     }
   }
 
-  closeBuyModal(e) {
+  closeModal(e) {
     e.preventDefault();
 
     this.setState({
@@ -72,36 +85,38 @@ class Account extends Component {
     })
   }
 
-
   render () {
-    let holdings = 20000 
+    let holdings = 20000
     return (
       <form>
         <h1 id="accountHeader"> My Account </h1>
         <h4><b>Available Cash:</b> {`${holdings}`} USD </h4>
         <div className="accountHistoryButton"> 
-          <button className="button is-rounded is-info accountHistoryButton">
-              Account History
-          </button>
+          <Link to="/AccountHistory">
+            <button className="button is-rounded is-info accountHistoryButton">
+                Account History
+            </button>
+          </Link>
         </div>
         <div className="field has-addons account-searchbox">
           <div className="control">
             <input 
-              className="input" 
+              className={`input ${this.state.error ? "is-danger" : ""}`}
               type="text" 
               placeholder="Ticker Symbol eg. AAPL"
               ref={this.inputCompany} 
               onInput={this.search}
             />
+            { this.state.error && <p className="help is-danger">{ this.state.error }</p> }
           </div>
           <div>
-            <Modal active={this.state.buyModalActive} onClose={this.closeBuyModal} company={this.state.company} />
+            <Modal active={this.state.buyModalActive} onClose={this.closeModal} company={this.state.company} />
             <button className="button is-success is-rounded accountButtons" onClick={this.openBuyModal}>
               Buy
             </button>
           </div>
           <div>
-            <ModalSell active={this.state.sellModalActive} onClose={this.closeBuyModal} company={this.state.company} />
+            <ModalSell active={this.state.sellModalActive} onClose={this.closeModal} company={this.state.company} />
             <button className="button is-danger is-rounded accountButtons" onClick={this.openSellModal}>
               Sell
             </button>
