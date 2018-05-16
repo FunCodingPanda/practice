@@ -20,7 +20,7 @@ class Navbar extends Component {
         });
       });
     }
-  }
+  } 
   
   logout() {
     localStorage.removeItem('auth');

@@ -11,6 +11,7 @@ class Modal extends Component {
     };
     this.inputShares = React.createRef()
     this.calculateTotal = this.calculateTotal.bind(this);
+    this.purchaseStocks = this.purchaseStocks.bind(this);
   }
   calculateTotal() {
     const shares = this.inputShares.current.value;
@@ -24,6 +25,35 @@ class Modal extends Component {
       })
     }
   }
+
+  purchaseStocks(e) {
+    e.preventDefault()
+    
+    const name = this.props.company.companyName;
+    const symbol = this.props.company.symbol;
+    const latestPrice = this.props.company.latestPrice;
+    const shares = this.inputShares.current.value;
+    const total = parseInt(shares) * this.props.company.latestPrice
+    const user_id = localStorage.getItem('userId')
+    const purchaseStocksData = {
+      name,
+      symbol,
+      latestPrice,
+      shares,
+      total,
+      user_id
+    }
+  }
+
+  //   axios.post(http://localhost:3000/users, purchaseStocksData)
+  //     .then(response => {
+  //       if (response.status === 201) {
+
+  //       renders the function 
+  //       window.location.assign('./account');
+  //     });
+  // }
+
   render() {
     if (this.props.company) {
       const { companyName, latestPrice, symbol } = this.props.company;
@@ -50,7 +80,7 @@ class Modal extends Component {
               { this.state.total && <p><b>Total:</b> { this.state.total } USD</p> }
             </section>
             <footer className="modal-card-foot">
-              <button className="button is-success is-rounded">Buy</button>
+              <button className="button is-success is-rounded" onClick={ this.purchaseStocks }>Buy</button>
               <button className="button is-rounded" onClick={this.props.onClose}>Cancel</button>
             </footer>
           </div>
