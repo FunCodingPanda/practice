@@ -41,7 +41,7 @@ class Signup extends Component {
 
   validateEmail() {
     const email = this.inputEmail.current.value;
-    if (!email.match(/\w+[\w-\.]*\@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/gm)) {
+    if (!email.match(/\w+[\w-.]*@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/g)) {
       this.setState({
         errors: {
           email: 'This email is invalid'

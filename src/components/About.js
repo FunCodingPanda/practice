@@ -7,17 +7,13 @@ class About extends Component {
         <div class="container box">
           {/*<div class="notification box2">*/}
             <h1 className='navbarHeader'>About</h1>
-            Lorem ipsum dolor amet adaptogen subway tile cornhole next level 
-            fanny pack. Twee copper mug keffiyeh, direct trade fashion axe raclette 
-            cred kitsch kinfolk craft beer kale chips vinyl meh yr. Drinking vinegar 
-            taiyaki umami +1. Paleo selfies four dollar toast fingerstache food truck 
-            pabst tousled butcher. Live-edge kitsch shoreditch YOLO semiotics scenester 
-            asymmetrical bicycle rights sriracha kickstarter neutra waistcoat, listicle 
-            lomo single-origin coffee. Edison bulb polaroid seitan, plaid blog wolf 
-            asymmetrical enamel pin distillery celiac hammock sustainable forage bicycle 
-            rights tousled.
+
+            This website allows potential investors to practice investing in stocks before investing
+            in them in real life. Then the potential investor will gain the experience he or she needs
+            to become a successful investor in addition to gaining the confidence he or she needs to invest 
+            through banks and online platforms such as Robinhood. 
+
           </div>
-        // </div>
     )
   }
 }

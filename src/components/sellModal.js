@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
 import '../styles/modal.css';
 
 class ModalSell extends Component {
@@ -16,7 +14,7 @@ class ModalSell extends Component {
     const shares = this.inputShares.current.value;
     if (shares) {
       this.setState({
-        total: parseInt(shares) * this.props.company.latestPrice
+        total: parseInt(shares, 10) * this.props.company.latestPrice
       })
     } else {
       this.setState({

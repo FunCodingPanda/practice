@@ -32,9 +32,9 @@ class Navbar extends Component {
     return (
       <nav className="navbar is-transparent">
         <div className="navbar-brand">
-          <a className="navbar-item" href="/">
-            <img id="logo" src="" width="40" height="55"/>
-          </a>
+          {/*<a className="navbar-item" href="/">
+            <img id="logo" src="" width="40" height="55" alt="Website logo" />
+          </a>*/}
           <div className="navbar-burger burger" data-target="navbar-header">
             <span></span>
             <span></span>

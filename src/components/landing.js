@@ -16,7 +16,7 @@ class Landing extends Component {
           </div>
           <div className='carousel-item has-background'>
             <img className="is-background" src="https://wikiki.github.io/images/life.jpg" alt="" width="640" height="310" />
-            <div className="title"> Save <a href="https://lasongbox.com" target="_blank"></a></div>
+            <div className="title"> Save</div>
           </div>
           <div className='carousel-item has-background'>
             <img className="is-background" src="https://www.runningalpha.com/wp-content/uploads/2014/11/blue-poster-img.png" alt="" width="640" height="310" />

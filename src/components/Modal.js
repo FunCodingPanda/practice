@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
 import '../styles/modal.css';
 
 class Modal extends Component {
@@ -17,7 +15,7 @@ class Modal extends Component {
     const shares = this.inputShares.current.value;
     if (shares) {
       this.setState({
-        total: parseInt(shares) * this.props.company.latestPrice
+        total: parseInt(shares, 10) * this.props.company.latestPrice
       })
     } else {
       this.setState({
@@ -28,33 +26,33 @@ class Modal extends Component {
 
   purchaseStocks(e) {
     e.preventDefault()
-    
-    const name = this.props.company.companyName;
+
     const symbol = this.props.company.symbol;
     const latestPrice = this.props.company.latestPrice;
-    const shares = this.inputShares.current.value;
-    const total = parseInt(shares) * this.props.company.latestPrice
+    const quantity = this.inputShares.current.value;
+    const total = parseInt(quantity, 10) * this.props.company.latestPrice
     const user_id = localStorage.getItem('userId')
     const purchaseStocksData = {
-      name,
       symbol,
-      latestPrice,
-      shares,
+      price: latestPrice,
+      quantity,
       total,
       user_id
     }
-  }
 
-  //   axios.post(http://localhost:3000/users, purchaseStocksData)
+  //   axios.post(`http://localhost:3000/stocks/${symbol}/buy`, purchaseStocksData)
   //     .then(response => {
-  //       if (response.status === 201) {
+  //       if (response.status === 200) {
+  //         console.log(response);
 
-  //       renders the function 
-  //       window.location.assign('./account');
+  //       // renders the function 
+  //       // window.location.assign('./account');
   //     });
   // }
+  }
 
   render() {
+    const { type } = this.props;
     if (this.props.company) {
       const { companyName, latestPrice, symbol } = this.props.company;
       return (
@@ -80,7 +78,12 @@ class Modal extends Component {
               { this.state.total && <p><b>Total:</b> { this.state.total } USD</p> }
             </section>
             <footer className="modal-card-foot">
-              <button className="button is-success is-rounded" onClick={ this.purchaseStocks }>Buy</button>
+              <button
+                className={`button ${type === 'buy' ? 'is-success' : 'is-danger'} is-rounded`}
+                onClick={ () => this.props.onSubmit(symbol, this.inputShares.current.value) }
+              >
+                { type === 'buy' ? 'Buy' : 'Sell' }
+              </button>
               <button className="button is-rounded" onClick={this.props.onClose}>Cancel</button>
             </footer>
           </div>

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Modal from './Modal'
 import ModalSell from './sellModal'
 import '../styles/Account.css'
+import { getCurrentUser } from '../utils/users';
 
 
 class Account extends Component {
@@ -11,6 +12,7 @@ class Account extends Component {
     super(props);
     this.state = {
       company: null,
+      user: { cash: 0 },
       error: null,
       buyModalActive: false,
       sellModalActive: false
@@ -21,6 +23,17 @@ class Account extends Component {
     this.closeModal = this.closeModal.bind(this);
     this.openSellModal = this.openSellModal.bind(this);
   }
+
+  componentDidMount() {
+    getCurrentUser().then(user => {
+      if (!user.error) {
+        this.setState({
+          user
+        })
+      }
+    });
+  }
+
   search(e) {
     e.preventDefault();
 
@@ -85,12 +98,21 @@ class Account extends Component {
     })
   }
 
+  buy(symbol, quantity) {
+    
+  }
+
+  sell(symbol, quantity) {
+    
+  }
+
   render () {
-    let holdings = 20000
+    // users.cash in the holdings for updates
+    // networth cash Fplus everything in the holdings
     return (
       <form>
         <h1 id="accountHeader"> My Account </h1>
-        <h4><b>Available Cash:</b> {`${holdings}`} USD </h4>
+        <h4><b>Available Cash:</b> {`${this.state.user.cash}`} USD </h4>
         <div className="accountHistoryButton"> 
           <Link to="/AccountHistory">
             <button className="button is-rounded is-info accountHistoryButton">
@@ -110,13 +132,25 @@ class Account extends Component {
             { this.state.error && <p className="help is-danger">{ this.state.error }</p> }
           </div>
           <div>
-            <Modal active={this.state.buyModalActive} onClose={this.closeModal} company={this.state.company} />
+            <Modal
+              active={this.state.buyModalActive}
+              onClose={this.closeModal}
+              onSubmit={this.buy}
+              company={this.state.company}
+              type="buy"
+            />
             <button className="button is-success is-rounded accountButtons" onClick={this.openBuyModal}>
               Buy
             </button>
           </div>
           <div>
-            <ModalSell active={this.state.sellModalActive} onClose={this.closeModal} company={this.state.company} />
+            <Modal
+              active={this.state.sellModalActive}
+              onClose={this.closeModal}
+              onSubmit={this.sell}
+              company={this.state.company}
+              type="sell"
+            />
             <button className="button is-danger is-rounded accountButtons" onClick={this.openSellModal}>
               Sell
             </button>

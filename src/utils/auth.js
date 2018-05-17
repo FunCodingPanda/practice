@@ -11,7 +11,8 @@ export const installAuthInterceptor = () => {
   axios.interceptors.request.use(config => {
     const auth = localStorage.getItem('auth');
 
-    if (auth) {
+    // Make sure to only add headers for our backend
+    if (auth && config.url.match(/localhost/)) {
       const { access_token } = JSON.parse(auth);
       config.headers.Authorization = `Bearer ${access_token}`;
     }

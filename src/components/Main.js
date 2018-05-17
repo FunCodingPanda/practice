@@ -3,9 +3,9 @@ import { Switch, Route } from 'react-router-dom'
 import About from './About'
 import Account from './Account'
 import AllCompanies from './AllCompanies'
-import Landing from './Landing'
-import Login from './Login'
-import Signup from './Signup'
+import Landing from './landing'
+import Login from './login'
+import Signup from './signup'
 import AccountHistory from './AccountHistory'
 
 // The Main component renders one of the three provided
