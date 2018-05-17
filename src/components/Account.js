@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Modal from './Modal'
-import ModalSell from './sellModal'
+import Holdings from './Holdings';
 import '../styles/Account.css'
 import { getCurrentUser } from '../utils/users';
 
@@ -15,13 +15,17 @@ class Account extends Component {
       user: { cash: 0 },
       error: null,
       buyModalActive: false,
-      sellModalActive: false
+      sellModalActive: false,
+      holdings: [],
+      stocks: {}
     };
     this.inputCompany = React.createRef()
     this.search = this.search.bind(this);
     this.openBuyModal = this.openBuyModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.openSellModal = this.openSellModal.bind(this);
+    this.buy = this.buy.bind(this);
+    this.sell = this.sell.bind(this);
   }
 
   componentDidMount() {
@@ -31,7 +35,22 @@ class Account extends Component {
           user
         })
       }
-    });
+      return user;
+    }).then(user => {
+      // return { data: [
+      //   { symbol: 'AAPL', quantity: 4, price: 172.29 },
+      //   { symbol: 'MSFT', quantity: 2, price: 98.33 },
+      // ]};
+      return axios.get(`http://localhost:3000/users/${user.id}/holdings`)
+    }).then(response => response.data)
+      .then(holdings => {
+      this.setState({ holdings });
+      const symbols = holdings.map(holding => holding.ticker_symbol).join(',');
+      return axios.get(`https://api.iextrading.com/1.0/stock/market/batch?symbols=${symbols}&types=quote`)
+    }).then(response => response.data)
+      .then(stocks => this.setState({
+        stocks
+      }))
   }
 
   search(e) {
@@ -99,11 +118,24 @@ class Account extends Component {
   }
 
   buy(symbol, quantity) {
-    
+    const data = {
+      userId: this.state.user.id,
+      quantity,
+      price: this.state.company.latestPrice
+    }
+    axios.post(`http://localhost:3000/stocks/${symbol}/buy`, data)
+      .then(response => response.data)
+      .then(({ cash, holding, transaction }) => this.setState({
+        buyModalActive: false,
+        user: {
+          ...this.state.user,
+          cash
+        }
+      }));
   }
 
   sell(symbol, quantity) {
-    
+    console.log(symbol, quantity)
   }
 
   render () {
@@ -167,6 +199,7 @@ class Account extends Component {
         }
         <div className="container">
           <h5><b>My Shares:</b></h5>
+          <Holdings holdings={this.state.holdings} stocks={this.state.stocks} />
         </div>  
       </form>
     )

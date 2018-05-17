@@ -80,7 +80,10 @@ class Modal extends Component {
             <footer className="modal-card-foot">
               <button
                 className={`button ${type === 'buy' ? 'is-success' : 'is-danger'} is-rounded`}
-                onClick={ () => this.props.onSubmit(symbol, this.inputShares.current.value) }
+                onClick={(e) => {
+                  e.preventDefault();
+                  return this.props.onSubmit(symbol, this.inputShares.current.value);
+                }}
               >
                 { type === 'buy' ? 'Buy' : 'Sell' }
               </button>

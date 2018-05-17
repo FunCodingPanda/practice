@@ -1,0 +1,4 @@
+.holdings-table td, .holdings-table th {
+  border: 1px solid #aaa;
+  padding: 4px;
+}
