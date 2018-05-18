@@ -4,7 +4,7 @@ import '../styles/Holdings.css';
 class Holdings extends Component {
   render () {
     return (
-      <table className="holdings-table">
+      <table className="holdings-table move">
         <thead>
           <tr>
             <th>Name</th>
@@ -26,8 +26,8 @@ class Holdings extends Component {
                   <td>{holding.name}</td>
                   <td>{holding.ticker_symbol}</td>
                   <td>{holding.quantity}</td>
-                  <td>{price} USD</td>
-                  <td>{holding.quantity * price} USD</td>
+                  <td>{price.toFixed(2)} USD</td>
+                  <td>{(holding.quantity * price).toFixed(2)} USD</td>
                 </tr>
               );
             })

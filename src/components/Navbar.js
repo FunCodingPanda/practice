@@ -66,9 +66,11 @@ class Navbar extends Component {
                 Log Out
               </a>
             }
-            <Link to="/account" className="navbar-item">
+            {
+             this.state.user && <Link to="/account" className="navbar-item">
               My Account
-            </Link>
+              </Link>
+            }
           </div>
           <div className="navbar-end">
             <span className="navbar-item">

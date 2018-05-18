@@ -39,17 +39,7 @@ class Modal extends Component {
       total,
       user_id
     }
-
-  //   axios.post(`http://localhost:3000/stocks/${symbol}/buy`, purchaseStocksData)
-  //     .then(response => {
-  //       if (response.status === 200) {
-  //         console.log(response);
-
-  //       // renders the function 
-  //       // window.location.assign('./account');
-  //     });
-  // }
-  }
+ }
 
   render() {
     const { type } = this.props;

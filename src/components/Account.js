@@ -26,9 +26,15 @@ class Account extends Component {
     this.openSellModal = this.openSellModal.bind(this);
     this.buy = this.buy.bind(this);
     this.sell = this.sell.bind(this);
+    this.refreshState = this.refreshState.bind(this);
   }
 
   componentDidMount() {
+    this.refreshState();
+  }
+
+  refreshState() {
+    // get current user
     getCurrentUser().then(user => {
       if (!user.error) {
         this.setState({
@@ -37,15 +43,13 @@ class Account extends Component {
       }
       return user;
     }).then(user => {
-      // return { data: [
-      //   { symbol: 'AAPL', quantity: 4, price: 172.29 },
-      //   { symbol: 'MSFT', quantity: 2, price: 98.33 },
-      // ]};
+      // get user holdings
       return axios.get(`http://localhost:3000/users/${user.id}/holdings`)
     }).then(response => response.data)
       .then(holdings => {
       this.setState({ holdings });
       const symbols = holdings.map(holding => holding.ticker_symbol).join(',');
+      // get stock prices
       return axios.get(`https://api.iextrading.com/1.0/stock/market/batch?symbols=${symbols}&types=quote`)
     }).then(response => response.data)
       .then(stocks => this.setState({
@@ -125,26 +129,31 @@ class Account extends Component {
     }
     axios.post(`http://localhost:3000/stocks/${symbol}/buy`, data)
       .then(response => response.data)
-      .then(({ cash, holding, transaction }) => this.setState({
-        buyModalActive: false,
-        user: {
-          ...this.state.user,
-          cash
-        }
-      }));
+      .then(() => this.setState({
+        buyModalActive: false
+      }))
+      .then(() => this.refreshState());
   }
 
   sell(symbol, quantity) {
-    console.log(symbol, quantity)
+    const dataSell = {
+      userId: this.state.user.id,
+      quantity, 
+      price: this.state.company.latestPrice
+    }
+    axios.post(`http://localhost:3000/stocks/${symbol}/sell`, dataSell)
+     .then(response => response.data)
+     .then(() => this.setState({
+       sellModalActive: false
+     }))
+     .then(() => this.refreshState());
   }
 
   render () {
-    // users.cash in the holdings for updates
-    // networth cash Fplus everything in the holdings
     return (
       <form>
         <h1 id="accountHeader"> My Account </h1>
-        <h4><b>Available Cash:</b> {`${this.state.user.cash}`} USD </h4>
+        <h4><b>Available Cash:</b> {`${this.state.user.cash.toFixed(2)}`} USD </h4>
         <div className="accountHistoryButton"> 
           <Link to="/AccountHistory">
             <button className="button is-rounded is-info accountHistoryButton">

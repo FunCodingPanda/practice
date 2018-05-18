@@ -11,6 +11,21 @@
   bottom: 0;
   width: 100%;
   font-size: 40px;
+}
+
+.is-green {
   color: green;
 }
 
+.is-red {
+  color: red;
+}
+
+.transactions-table {
+  margin-left: 140px;
+}
+
+.transactions-table td, .transactions-table th {
+  border: 1px solid #aaa;
+  padding: 4px;
+}
