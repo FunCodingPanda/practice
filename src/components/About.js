@@ -11,7 +11,7 @@ class About extends Component {
             This website allows potential investors to practice investing in stocks before investing
             in them in real life. Then the potential investor will gain the experience he or she needs
             to become a successful investor in addition to gaining the confidence he or she needs to invest 
-            through banks and online platforms such as Robinhood. 
+            through banks and/or online platforms such as Robinhood. 
 
           </div>
     )

@@ -10,7 +10,7 @@ class AccountHistory extends Component {
     this.state = {
       user: { cash: 0 },
       holdings: [],
-      stocks: [],
+      stocks: {},
       transactions: [],
       dataIsReady: false
     }
@@ -57,7 +57,6 @@ class AccountHistory extends Component {
 
   render () {
     if (this.state.dataIsReady) {
-
       const totalHoldings = this.state.holdings.reduce((sum, holding) => {
         const price = this.state.stocks[holding.ticker_symbol].quote.latestPrice;
         return sum + (holding.quantity * price);
@@ -88,14 +87,15 @@ class AccountHistory extends Component {
               <tbody>
                 {
                   this.state.transactions.map((transaction, idx) => {
+                    let realTime = (new Date(transaction.created_at).toLocaleString());
                     return (
-                      <tr>
+                      <tr key={idx}>
                         <td>{transaction.type}</td>
                         <td>{transaction.ticker_symbol}</td>
                         <td>{transaction.quantity}</td>
                         <td>{transaction.price} USD</td>
                         <td>{transaction.total} USD</td>
-                        <td>{transaction.created_at}</td>
+                        <td>{realTime}</td>
                       </tr>
                     );
                   })
