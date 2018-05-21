@@ -14,7 +14,7 @@ class Navbar extends Component {
 
   componentDidMount() {
     if (this.state.userId) {
-      axios.get(`http://localhost:3000/users/${this.state.userId}`).then(response => {
+      axios.get(`${process.env.REACT_APP_BASE_URL}/users/${this.state.userId}`).then(response => {
         this.setState({
           user: response.data
         });

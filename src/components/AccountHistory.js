@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import moment from 'moment';
 import '../styles/AccountHistory.css';
 import Holdings from './Holdings';
 import { getCurrentUser } from '../utils/users';
@@ -32,19 +33,19 @@ class AccountHistory extends Component {
       return user;
     }).then(user => {
       // get user holdings
-      return axios.get(`http://localhost:3000/users/${user.id}/holdings`)
+      return axios.get(`${process.env.REACT_APP_BASE_URL}/users/${user.id}/holdings`)
     }).then(response => response.data)
       .then(holdings => {
       this.setState({ holdings });
       const symbols = holdings.map(holding => holding.ticker_symbol).join(',');
       // get stock prices
-      return axios.get(`https://api.iextrading.com/1.0/stock/market/batch?symbols=${symbols}&types=quote`)
+      return axios.get(`${process.env.REACT_APP_IEX_URL}/stock/market/batch?symbols=${symbols}&types=quote`)
     }).then(response => response.data)
       .then(stocks => this.setState({
         stocks,
         dataIsReady: true
       }))
-      .then(() => axios.get(`http://localhost:3000/users/${this.state.user.id}/transactions`))
+      .then(() => axios.get(`${process.env.REACT_APP_BASE_URL}/users/${this.state.user.id}/transactions`))
       .then(response => {
         console.log(response.data);
         return response.data;
@@ -87,7 +88,7 @@ class AccountHistory extends Component {
               <tbody>
                 {
                   this.state.transactions.map((transaction, idx) => {
-                    let realTime = (new Date(transaction.created_at).toLocaleString());
+                    const realTime = moment(transaction.created_at).format('ddd MMM D, YYYY h:mm a');
                     return (
                       <tr key={idx}>
                         <td>{transaction.type}</td>

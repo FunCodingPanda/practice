@@ -17,7 +17,7 @@ class AllCompanies extends Component {
     e.preventDefault();
 
     const symbol = this.inputCompany.current.value;
-    axios.get(`https://api.iextrading.com/1.0/stock/${symbol}/quote`)
+    axios.get(`${process.env.REACT_APP_IEX_URL}/stock/${symbol}/quote`)
       .then(response => {
         this.setState({
           company: response.data

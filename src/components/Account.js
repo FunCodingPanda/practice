@@ -44,13 +44,13 @@ class Account extends Component {
       return user;
     }).then(user => {
       // get user holdings
-      return axios.get(`http://localhost:3000/users/${user.id}/holdings`)
+      return axios.get(`${process.env.REACT_APP_BASE_URL}/users/${user.id}/holdings`)
     }).then(response => response.data)
       .then(holdings => {
       this.setState({ holdings });
       const symbols = holdings.map(holding => holding.ticker_symbol).join(',');
       // get stock prices
-      return axios.get(`https://api.iextrading.com/1.0/stock/market/batch?symbols=${symbols}&types=quote`)
+      return axios.get(`${process.env.REACT_APP_IEX_URL}/stock/market/batch?symbols=${symbols}&types=quote`)
     }).then(response => response.data)
       .then(stocks => this.setState({
         stocks
@@ -65,7 +65,7 @@ class Account extends Component {
       this.setState({
         error: null
       })
-      axios.get(`https://api.iextrading.com/1.0/stock/${symbol}/quote`)
+      axios.get(`${process.env.REACT_APP_IEX_URL}/stock/${symbol}/quote`)
         .then(response => {
           this.setState({
             company: response.data
@@ -127,7 +127,7 @@ class Account extends Component {
       quantity,
       price: this.state.company.latestPrice
     }
-    axios.post(`http://localhost:3000/stocks/${symbol}/buy`, data)
+    axios.post(`${process.env.REACT_APP_BASE_URL}/stocks/${symbol}/buy`, data)
       .then(response => response.data)
       .then(() => this.setState({
         buyModalActive: false
@@ -141,7 +141,7 @@ class Account extends Component {
       quantity, 
       price: this.state.company.latestPrice
     }
-    axios.post(`http://localhost:3000/stocks/${symbol}/sell`, dataSell)
+    axios.post(`${process.env.REACT_APP_BASE_URL}/stocks/${symbol}/sell`, dataSell)
      .then(response => response.data)
      .then(() => this.setState({
        sellModalActive: false
