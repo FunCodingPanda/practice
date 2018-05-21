@@ -1,4 +1,32 @@
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+## Overview
+* The main purpose for Smart Investing is to give those who wants to get into investing the opportunity to learn and gain experience before investing their own money. 
+
+* Our motivation came from educating people so they could make profits using what they currently have. In America, the current inflation rate in 2018 is 2.54 % according to <https://www.statista.com/statistics/244983/projected-inflation-rate-in-the-united-states/>. If you are currently earning an income from a employer or a company, you are most likely taxed anywhere between 25-40% depending on your salary and the state that you are in. If you invest your money long term (1 year +) in America you are only taxed 15%, it is approximately 20% if you are a short term investor. 
+
+## Current Features
+* Our website allows users to login/signUp to practice purchasing and selling shares with the latest market price. This service is only available for those who have signed up.  
+* Ability to view the history of all the transactions under the account history tab when they are login. 
+* Users could search for all the available companies using their ticker symbol on the right side of the navigation bar. 
+
+## Components
+* Languages:
+    Frontend 
+    * React 
+    * CSS
+    * JavaScript (ES6)
+    Backend 
+    * MVC 
+    * RESTful
+    * Express 
+    * Postgresql 
+    * Knex 
+* Deploy it using Heroku 
+  
+* Framework:
+    * Bulma 
+    
+## How to Install
+*This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
