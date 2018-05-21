@@ -12,7 +12,7 @@ export const installAuthInterceptor = () => {
     const auth = localStorage.getItem('auth');
 
     // Make sure to only add headers for our backend
-    if (auth && config.url.match(/localhost/)) {
+    if (auth && config.url.match(/(localhost|dry-stream)/)) {
       const { access_token } = JSON.parse(auth);
       config.headers.Authorization = `Bearer ${access_token}`;
     }
