@@ -10,11 +10,12 @@
 
 ## Components
 * Languages:
-    Frontend 
+* Frontend 
     * React 
     * CSS
     * JavaScript (ES6)
-    Backend 
+    
+* Backend 
     * MVC 
     * RESTful
     * Express 
