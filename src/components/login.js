@@ -27,7 +27,7 @@ class Login extends Component {
       errors: null
     })
 
-    axios.post('${process.env.REACT_APP_BASE_URL}/login', data)
+    axios.post(`${process.env.REACT_APP_BASE_URL}/login`, data)
       .then(response => {
           console.log(response);
           if (response.status === 200 && response.data.auth) {
