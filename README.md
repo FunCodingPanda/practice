@@ -1,7 +1,7 @@
 ## Overview
 * The main purpose for Smart Investing is to give those who wants to get into investing the opportunity to learn and gain experience before investing their own money. 
 
-* Our motivation came from educating people so they could make profits using what they currently have. In America, the current inflation rate in 2018 is 2.54 % according to <https://www.statista.com/statistics/244983/projected-inflation-rate-in-the-united-states/>. If you are currently earning an income from a employer or a company, you are most likely taxed anywhere between 25-40% depending on your salary and the state that you are in. If you invest your money long term (1 year +) in America you are only taxed 15%, it is approximately 20% if you are a short term investor. 
+* Our motivation came from educating people so they could make profits using what they currently have. In America, the current inflation rate in 2018 is 2.54 % according to <https://www.statista.com/statistics/244983/projected-inflation-rate-in-the-united-states/>. If you are currently earning an income from a employer or a company, you are most likely taxed anywhere between 25-40% depending on your salary and the state that you are in. If you invest your money long term (1 year +) in America you are only taxed 15%, it is approximately 20% if you are a short term investor. Investing has a lot of benefits. 
 
 ## Current Features
 * Our website allows users to login/signUp to practice purchasing and selling shares with the latest market price. This service is only available for those who have signed up.  
