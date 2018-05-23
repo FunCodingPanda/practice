@@ -22,3 +22,8 @@
   margin-bottom: 10px;
   text-align: left;
 }
+
+.navbar-item img.navbar-logo {
+  margin-left: 16px;
+  max-height: 5rem;
+}
