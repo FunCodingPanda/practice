@@ -9,7 +9,6 @@ class Modal extends Component {
     };
     this.inputShares = React.createRef()
     this.calculateTotal = this.calculateTotal.bind(this);
-    this.purchaseStocks = this.purchaseStocks.bind(this);
   }
   calculateTotal() {
     const shares = this.inputShares.current.value;
@@ -23,23 +22,6 @@ class Modal extends Component {
       })
     }
   }
-
-  purchaseStocks(e) {
-    e.preventDefault()
-
-    const symbol = this.props.company.symbol;
-    const latestPrice = this.props.company.latestPrice;
-    const quantity = this.inputShares.current.value;
-    const total = parseInt(quantity, 10) * this.props.company.latestPrice
-    const user_id = localStorage.getItem('userId')
-    const purchaseStocksData = {
-      symbol,
-      price: latestPrice,
-      quantity,
-      total,
-      user_id
-    }
- }
 
   render() {
     const { type } = this.props;
