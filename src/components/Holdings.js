@@ -4,7 +4,7 @@ import '../styles/Holdings.css';
 class Holdings extends Component {
   render () {
     return (
-      <table className="holdings-table move">
+      <table className="holdings-table">
         <thead>
           <tr>
             <th>Name</th>

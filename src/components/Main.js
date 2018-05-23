@@ -14,17 +14,15 @@ import AccountHistory from './AccountHistory'
 // with /roster or /schedule. The / route will only match
 // when the pathname is exactly the string "/"
 const Main = () => (
-  <div>
-    <Switch>
-      <Route exact path='/' component={Landing}/>
-      <Route exact path='/signup' component={Signup}/>
-      <Route exact path='/login' component={Login}/>
-      <Route exact path='/about' component={About}/>
-      <Route exact path='/AllCompanies' component={AllCompanies}/>
-      <Route exact path='/account' component={Account}/>
-      <Route exact path='/AccountHistory' component={AccountHistory}/>
-    </Switch>
-  </div>
+  <Switch>
+    <Route exact path='/' component={Landing}/>
+    <Route exact path='/signup' component={Signup}/>
+    <Route exact path='/login' component={Login}/>
+    <Route exact path='/about' component={About}/>
+    <Route exact path='/AllCompanies' component={AllCompanies}/>
+    <Route exact path='/account' component={Account}/>
+    <Route exact path='/AccountHistory' component={AccountHistory}/>
+  </Switch>
 )
 
 export default Main;
