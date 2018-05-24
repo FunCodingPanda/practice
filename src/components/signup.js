@@ -29,7 +29,7 @@ class Signup extends Component {
       confirmPassword
     };
 
-    axios.post(`${process.env.REACT_APP_BASE_URL}`, data)
+    axios.post(`${process.env.REACT_APP_BASE_URL}/users`, data)
       .then(response => {
         if (response.status === 201 && response.data.auth) {
           localStorage.setItem('auth', JSON.stringify(response.data.auth));
