@@ -33,7 +33,7 @@ class Navbar extends Component {
       <nav className="navbar is-transparent">
         <div className="navbar-brand">
           <a className="navbar-item" href="/">
-            <img className="navbar-logo" src="./smartInvesting.png" width="40" height="40" alt="Logo" />
+            <img className="navbar-logo" src="./smartInvestinglogo.png" width="40" height="40" alt="Logo" />
           </a>
           <div className="navbar-burger burger" data-target="navbar-header">
             <span></span>
@@ -44,7 +44,7 @@ class Navbar extends Component {
 
         <div id="navbar-header" className="navbar-menu">
           <div className="navbar-start">
-            <h4 id='title'> SMART INVESTING </h4>
+            <h5 id='title'> SMART INVESTING </h5>
             <Link to="/" className="navbar-item">
               Home
             </Link>
@@ -52,18 +52,18 @@ class Navbar extends Component {
               About
             </Link>
             {
-              !this.state.user && <Link to="/signup" className="navbar-item">
-                Sign Up
+              !this.state.user && <Link to="/signup"> <button className="navbar-item button is-rounded ebutton">
+                Sign Up </button>
               </Link>
             }
             {
-              !this.state.user && <Link to="/login" className="navbar-item">
-                Login
+              !this.state.user && <Link to="/login">  <button className="navbar-item button is-rounded ebutton">
+                Login </button>
               </Link>
             }
             {
-              this.state.user && <a onClick={this.logout} className="navbar-item">
-                Log Out
+              this.state.user && <a onClick={this.logout}> <button className="navbar-item button is-rounded ebutton">
+                Log Out </button>
               </a>
             }
             {

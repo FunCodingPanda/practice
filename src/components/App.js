@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import '../styles/App.css';
 
 import Navbar from './Navbar';
-// import Landing from './landing'
 import Main from './Main'
+import Footer from './Footer';
 
 
 
@@ -13,6 +13,7 @@ class App extends Component {
       <div className="App">
         <Navbar />
         <Main />
+        <Footer />
       </div>
     );
   }

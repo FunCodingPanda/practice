@@ -8,11 +8,6 @@ import Login from './login'
 import Signup from './signup'
 import AccountHistory from './AccountHistory'
 
-// The Main component renders one of the three provided
-// Routes (provided that one matches). Eg. Both the /roster
-// and /schedule routes will match any pathname that starts
-// with /roster or /schedule. The / route will only match
-// when the pathname is exactly the string "/"
 const Main = () => (
   <Switch>
     <Route exact path='/' component={Landing}/>

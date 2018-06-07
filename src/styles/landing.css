@@ -1,3 +1,7 @@
 .hero.has-carousel {
   position: static !important;
 }
+
+.smallHeader {
+  font-weight: 700;
+}
