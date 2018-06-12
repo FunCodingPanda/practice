@@ -5,6 +5,7 @@ import Modal from './Modal'
 import Holdings from './Holdings';
 import '../styles/Account.css'
 import { getCurrentUser } from '../utils/users';
+import StockChart from './StockChart';
 
 
 class Account extends Component {
@@ -17,7 +18,8 @@ class Account extends Component {
       buyModalActive: false,
       sellModalActive: false,
       holdings: [],
-      stocks: {}
+      stocks: {},
+      stockChartData: []
     };
     this.inputCompany = React.createRef()
     this.search = this.search.bind(this);
@@ -70,7 +72,14 @@ class Account extends Component {
           this.setState({
             company: response.data
           })
-        })
+        });
+      axios.get(`${process.env.REACT_APP_IEX_URL}/stock/${symbol}/chart/1y`)
+        .then(response => {
+          const stockChartData = response.data.map(day =>
+            [(new Date(day.date)).getTime(), day.close]
+          );
+          this.setState({ stockChartData });
+        });
     } else {
       this.setState({
         company: null,
@@ -161,55 +170,66 @@ class Account extends Component {
             </button>
           </Link>
         </div>
-        <div className="field has-addons account-searchbox">
-          <div className="control">
-            <input 
-              className={`input ${this.state.error ? "is-danger" : ""}`}
-              type="text" 
-              placeholder="Ticker Symbol eg. AAPL"
-              ref={this.inputCompany} 
-              onInput={this.search}
-            />
-            { this.state.error && <p className="help is-danger">{ this.state.error }</p> }
+        <div className="columns">
+          <div className="column is-two-fifths">
+            <div className="field has-addons account-searchbox">
+              <div className="control">
+                <input 
+                  className={`input ${this.state.error ? "is-danger" : ""}`}
+                  type="text" 
+                  placeholder="Ticker Symbol eg. AAPL"
+                  ref={this.inputCompany} 
+                  onInput={this.search}
+                />
+                { this.state.error && <p className="help is-danger">{ this.state.error }</p> }
+              </div>
+              <div>
+                <Modal
+                  active={this.state.buyModalActive}
+                  onClose={this.closeModal}
+                  onSubmit={this.buy}
+                  company={this.state.company}
+                  type="buy"
+                />
+                <button className="button is-success is-rounded accountButtons" onClick={this.openBuyModal}>
+                  Buy
+                </button>
+              </div>
+              <div>
+                <Modal
+                  active={this.state.sellModalActive}
+                  onClose={this.closeModal}
+                  onSubmit={this.sell}
+                  company={this.state.company}
+                  type="sell"
+                />
+                <button className="button is-danger is-rounded accountButtons" onClick={this.openSellModal}>
+                  Sell
+                </button>
+              </div>
+            </div>
+            {
+              this.state.company &&
+                <div id='searchedCompany'>
+                  {
+                    this.state.stockChartData.length > 0 &&
+                      <StockChart
+                        title={`${this.state.company.symbol} Price`}
+                        data={this.state.stockChartData}
+                      />
+                  }
+                  <p><b>Company:</b> { this.state.company.companyName }</p>
+                  <p><b>Symbol:</b> { this.state.company.symbol }</p>
+                  <p><b>Latest Price:</b> { this.state.company.latestPrice } USD</p>
+                  <p><b>Change from Previous Close:</b> { this.state.company.change } USD ({ (100 * this.state.company.changePercent).toFixed(2) }%)</p>
+                </div>
+            }
           </div>
-          <div>
-            <Modal
-              active={this.state.buyModalActive}
-              onClose={this.closeModal}
-              onSubmit={this.buy}
-              company={this.state.company}
-              type="buy"
-            />
-            <button className="button is-success is-rounded accountButtons" onClick={this.openBuyModal}>
-              Buy
-            </button>
-          </div>
-          <div>
-            <Modal
-              active={this.state.sellModalActive}
-              onClose={this.closeModal}
-              onSubmit={this.sell}
-              company={this.state.company}
-              type="sell"
-            />
-            <button className="button is-danger is-rounded accountButtons" onClick={this.openSellModal}>
-              Sell
-            </button>
+          <div className="column">
+            <h5><b>My Shares:</b></h5>
+            <Holdings holdings={this.state.holdings} stocks={this.state.stocks} />
           </div>
         </div>
-        {
-          this.state.company &&
-            <div id='searchedCompany'>
-              <p><b>Company:</b> { this.state.company.companyName }</p>
-              <p><b>Symbol:</b> { this.state.company.symbol }</p>
-              <p><b>Latest Price:</b> { this.state.company.latestPrice } USD</p>
-              <p><b>Change from Previous Close:</b> { this.state.company.change } USD ({ (100 * this.state.company.changePercent).toFixed(2) }%)</p>
-            </div>
-        }
-        <div className="container">
-          <h5><b>My Shares:</b></h5>
-          <Holdings holdings={this.state.holdings} stocks={this.state.stocks} />
-        </div>  
       </form>
     )
   }

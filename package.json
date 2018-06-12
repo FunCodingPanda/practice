@@ -6,9 +6,13 @@
     "axios": "^0.18.0",
     "bulma": "^0.7.1",
     "bulma-extensions": "^1.0.14",
+    "highcharts": "^6.1.0",
     "moment": "^2.22.1",
+    "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "react-jsx-highcharts": "^3.0.1",
+    "react-jsx-highstock": "^3.0.1",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4"
   },
