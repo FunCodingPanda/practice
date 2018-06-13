@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import '../styles/AccountHistory.css';
-import Holdings from './Holdings';
+// import Holdings from './Holdings';
 import { getCurrentUser } from '../utils/users';
+import StockChart from './StockChart';
 
 class AccountHistory extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class AccountHistory extends Component {
     this.state = {
       user: { cash: 0 },
       holdings: [],
+      holding_snapshots: [],
       stocks: {},
       transactions: [],
       dataIsReady: false
@@ -45,13 +47,15 @@ class AccountHistory extends Component {
         stocks,
         dataIsReady: true
       }))
+      .then(() => axios.get(`${process.env.REACT_APP_BASE_URL}/users/${this.state.user.id}/holding_snapshots`))
+      .then(response => {
+        return this.setState({ holding_snapshots: response.data });
+      })
       .then(() => axios.get(`${process.env.REACT_APP_BASE_URL}/users/${this.state.user.id}/transactions`))
       .then(response => {
-        console.log(response.data);
         return response.data;
       })
       .then(transactions => {
-        console.log(transactions);
         return this.setState({ transactions });
       });
   }
@@ -74,7 +78,8 @@ class AccountHistory extends Component {
               Total Holdings: <b>{totalHoldings.toFixed(2)} USD</b><br />
               Net Worth: <b>{netWorth.toFixed(2)} USD</b>
             </p>
-            <table className="transactions-table">
+            <StockChart className="account-history-chart" title="Net Worth History" data={this.state.holding_snapshots} />
+            <table className="table is-hoverable transactions">
               <thead>
                 <tr>
                   <th>Type</th>

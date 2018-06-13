@@ -67,10 +67,25 @@ class Account extends Component {
       this.setState({
         error: null
       })
+      // get stock information
       axios.get(`${process.env.REACT_APP_IEX_URL}/stock/${symbol}/quote`)
         .then(response => {
           this.setState({
             company: response.data
+          })
+        });
+      // get stock ratios 
+      axios.get(`${process.env.REACT_APP_IEX_URL}/stock/${symbol}/stats`)
+        .then(response => { 
+          this.setState({
+            ratios: response.data
+          })
+        });
+      //get stocks ratios 2
+      axios.get(`${process.env.REACT_APP_IEX_URL}/stock/${symbol}/financials`)
+        .then(response => { 
+          this.setState({
+            ratios2: response.data.financials
           })
         });
       axios.get(`${process.env.REACT_APP_IEX_URL}/stock/${symbol}/chart/1y`)
@@ -222,14 +237,61 @@ class Account extends Component {
                   <p><b>Symbol:</b> { this.state.company.symbol }</p>
                   <p><b>Latest Price:</b> { this.state.company.latestPrice } USD</p>
                   <p><b>Change from Previous Close:</b> { this.state.company.change } USD ({ (100 * this.state.company.changePercent).toFixed(2) }%)</p>
+                  <p><b>Return on Equity (ROE):</b> { this.state.ratios && this.state.ratios.returnOnEquity }</p>
+                  <p><b>Return on Assets (ROA):</b> { this.state.ratios && this.state.ratios.returnOnAssets }</p>
+                  <p><b>Net Profit Margin:</b> { this.state.ratios && (100 * (this.state.ratios.grossProfit/this.state.ratios.revenue)).toFixed(2) } %</p> 
+                  <p><b>Earnings Before Interest and Tax (EBIT):</b>{ this.state.ratios2 && this.state.ratios2[0].operatingRevenue - this.state.ratios2[0].operatingExpense }</p> 
+                  <p><b>EBITDA:</b> { this.state.ratios && this.state.ratios.EBITDA } </p>
+                  <p><b>Current Ratio:</b> { 
+                    this.state.ratios2 &&
+                      (
+                        (!this.state.totalLiabilities || !this.state.currentAssets) ?
+                        "Information is not available" :
+                        this.state.ratios2[0].currentAssets / this.state.ratios2[0].totalLiabilities
+                      ) }</p>
+                  <p><b>Debt to Equity Ratio:</b> {
+                    this.state.ratios2 && 
+                    (!this.state.totalLiabilities || !this.state.shareholdersEquity ?
+                    "Information is not available" :
+                    this.state.ratios2[0].totalLiabilities/this.state.ratios2[0].shareholderEquity) }</p>
                 </div>
             }
           </div>
           <div className="column">
-            <h5><b>My Shares:</b></h5>
+            <h5><b>My Shares</b></h5>
             <Holdings holdings={this.state.holdings} stocks={this.state.stocks} />
           </div>
         </div>
+        <div> {/*id='ratios'*/}
+
+            <section className="hero is-success is-medium">
+              <div className="hero-body">
+                <div className="container">
+                  <h1 className="title">
+                    Information on Financial Analysis Ratios
+                  </h1>
+                  <p className="subtitle">
+                    <b>Profitability Ratios</b>
+                        <p>{'\n'}Return on Equity (ROE, Return on net worth):{'\n'}
+                          <p className='indentation'>Measure of profitability that calculates how many dollars 
+                          of profit a company generates with each dollar of shareholders’ equity{'\n'}{'\n'}
+                        Formula:
+                        ROE = Net Income/ Shareholders Equity
+                          </p> 
+                        </p>
+                    
+                  </p>
+                  <h2 className="subtitle">
+                    <b>Operating Management Ratios </b>
+                  </h2>
+                  <h2 className="subtitle">
+                    <b>Leverage and Liquidity Ratios </b>
+                  </h2>
+                </div>
+              </div>
+            </section>
+
+        </div> 
       </form>
     )
   }

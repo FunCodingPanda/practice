@@ -4,14 +4,14 @@ import '../styles/Holdings.css';
 class Holdings extends Component {
   render () {
     return (
-      <table className="holdings-table">
+      <table className="table is-hoverable">
         <thead>
           <tr>
             <th>Name</th>
             <th>Symbol</th>
             <th>Quantity</th>
-            <th>Price</th>
-            <th>Total</th>
+            <th>Current Price</th>
+            <th>Current Total</th>
           </tr>
         </thead>
         <tbody>

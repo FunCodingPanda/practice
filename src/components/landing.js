@@ -63,10 +63,10 @@ class Landing extends Component {
             <div class="column is-half is-narrow">
               <div class="field has-addons">
                 <div class="control is-expanded">
-                  <input class="input" type="text" placeholder="Search for a Company" />
+                  <input class="input is-rounded" type="text" placeholder="Search for a Company" />
                 </div>
                 <div class="control">
-                  <a class="button is-info">
+                  <a class="button is-info is-rounded">
                     Search
                   </a>
                 </div>

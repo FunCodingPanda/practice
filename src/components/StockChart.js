@@ -5,12 +5,13 @@ import {
   LineSeries, RangeSelector, Tooltip
 } from 'react-jsx-highstock';
 
+// https://github.com/whawker/react-jsx-highcharts
 class StockChart extends Component {
   render() {
-    const { data, title } = this.props;
+    const { className, data, title } = this.props;
 
     return (
-      <div className="chart">
+      <div className={`${className || "chart"}`}>
         <HighchartsStockChart>
           <Chart zoomType="x" />
 

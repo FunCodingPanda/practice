@@ -1,17 +1,27 @@
 import React, { Component } from 'react';
 import axios from 'axios'; 
-import '../styles/AllCompanies.css'; 
+import '../styles/AllCompanies.css';
+import { Typeahead } from 'react-typeahead';
 
 
 class AllCompanies extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      company: null
+      company: null,
+      stockNames: []
     };
     this.inputCompany = React.createRef();
 
     this.search = this.search.bind(this);
+  }
+  componentDidMount() {
+    axios.get(`${process.env.REACT_APP_BASE_URL}/stocks`)
+      .then(response => {
+        this.setState({
+          stockNames: response.data.map(stock => stock.name)
+        });
+      });
   }
   search(e) {
     e.preventDefault();
@@ -31,14 +41,14 @@ class AllCompanies extends Component {
         <div className="field has-addons companies-searchbox">
           <div className="control">
             <input
-              className="input"
+              className="input is-rounded"
               placeholder="Ticker Symbol eg. AAPL"
               ref={this.inputCompany}
               type="text"
             />
           </div>
           <div className="control">
-            <button type="submit" className="button is-link">Search</button>
+            <button type="submit" className="button is-link is-rounded">Search</button>
           </div>
         </div>
         {
@@ -56,3 +66,11 @@ class AllCompanies extends Component {
 }
 
 export default AllCompanies;
+
+
+  // <Typeahead
+        //   customClasses={{
+        //     input: 'input'
+        //   }}
+        //   options={this.state.stockNames}
+        // />

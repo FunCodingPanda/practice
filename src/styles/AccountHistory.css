@@ -21,11 +21,16 @@
   color: red;
 }
 
-.transactions-table {
+.transactions{
   margin-left: 140px;
 }
 
-.transactions-table td, .transactions-table th {
+.account-history-chart {
+  margin-left: 140px;
+  margin-right: 25%;
+}
+
+/*.transactions-table td, .transactions-table th {
   border: 1px solid #aaa;
   padding: 4px;
-}
+}*/
