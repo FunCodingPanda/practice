@@ -248,8 +248,8 @@ class Account extends Component {
                     this.state.dividend !== 0 ? `${this.state.dividend} USD` : "No Dividend"
                   }</p>
                   <p><b>Change from Previous Close:</b> { this.state.company.change } USD ({ (100 * this.state.company.changePercent).toFixed(2) }%)</p>
-                  <p><b>Return on Equity (ROE):</b> { this.state.ratios && this.state.ratios.returnOnEquity }</p>
-                  <p><b>Return on Assets (ROA):</b> { this.state.ratios && this.state.ratios.returnOnAssets }</p>
+                  <p><b>Return on Equity (ROE):</b> { this.state.ratios && this.state.ratios.returnOnEquity } %</p>
+                  <p><b>Return on Assets (ROA):</b> { this.state.ratios && this.state.ratios.returnOnAssets } %</p>
                   <p><b>Net Profit Margin:</b> { this.state.ratios && (100 * (this.state.ratios.grossProfit/this.state.ratios.revenue)).toFixed(2) } %</p> 
                   <p><b>Earnings Before Interest and Tax (EBIT):</b>{ this.state.ratios2 && this.state.ratios2[0].operatingRevenue - this.state.ratios2[0].operatingExpense }</p> 
                   <p><b>EBITDA:</b> { this.state.ratios && this.state.ratios.EBITDA } </p>
@@ -283,24 +283,50 @@ class Account extends Component {
                   </h1>
                   <h2 className="subtitle">
                     <b>Profitability Ratios</b>
-                        <p>Return on Equity (ROE, Return on net worth):{'\n'}
-                           Return on Assets (ROA):{'\n'}
-                        </p>
+                        <p>Return on Equity (ROE, Return on net worth):</p>
+                          <span className='ratioInfo'> 
+                            Measure of profitability that calculates how many dollars of profit a company generates with each dollar of shareholders’ equity 
+                          </span>
+
+                        <p>{'\n'}Return on Assets (ROA):</p>
+                          <span className='ratioInfo'> 
+                            It is an indicator of how profitable a company is relative to its total assets. This gives an idea as to how efficient management is at using its assets to generate earnings.   
+                          </span>
+                        
                     
                   </h2>
                   <h2 className="subtitle">
                     <b>Operating Management Ratios </b>
-                      <p>Gross Profit Margin:{'\n'}
-                         Earnings Before Interest and Tax:{'\n'}
-                         Earnings Before Interest, Tax, Depreciation and Amortization:{'\n'}
-                         Net Profit Margin:{'\n'}
-                          </p>
+                      <p>Gross Profit Margin:</p>
+                        <span className='ratioInfo'> 
+                            Financial metric that assess a company’s health and business model revealing the proportion of money left over after accounting for the cost of goods sold.
+                        </span>
+                      <p>{'\n'}Earnings Before Interest and Tax:</p>
+                        <span className='ratioInfo'> 
+                          Financial metric that assess a company’s health and business model revealing the proportion of money left over after accounting for the cost of goods sold.
+                        </span>
+                      <p>{'\n'}Earnings Before Interest, Tax, Depreciation and Amortization:</p>
+                      <span className='ratioInfo'> 
+                          Includes all of a firm profits and expenses except interest, tax, depreciation, and amortization.
+                      </span>
+                      <p>{'\n'}Net Profit Margin:</p>
+                      <span className='ratioInfo'> 
+                        Includes all of a firm profits and expenses except interest, tax, depreciation, and amortization.
+                      </span>
                   </h2>
                   <h2 className="subtitle">
                     <b>Leverage and Liquidity Ratios </b>
-                      <p>Current Ratio:{'\n'}
-                         Debt-to-Equity:{'\n'}
-                      </p>
+                      <p>Current Ratio:</p> 
+                      <span className='ratioInfo'> 
+                        Measures the assets a company plans to use over the next 12 months with the debts it must pay during that same period. 
+                        This ratio lets you know whether the company will be able to pay any bills due over the next 12 months with assets it has on hand.
+                        It is Current Assets over Current Liabilities.
+                      </span>
+                      <p>{'\n'}Debt-to-Equity:</p>
+                      <span className='ratioInfo'> 
+                        The debt-to-equity ratio is a measure of the relationship between the capital contributed by creditors and the capital contributed by shareholders. 
+                        Total Liabilities over Shareholders' Equity.
+                      </span>
                   </h2>
                 </div>
               </div>
