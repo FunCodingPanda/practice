@@ -62,23 +62,20 @@ class Navbar extends Component {
               </Link>
             }
             {
-              this.state.user && <a onClick={this.logout}> <button className="navbar-item button is-rounded ebutton">
-                Log Out </button>
-              </a>
-            }
-            {
              this.state.user && <Link to="/account" className="navbar-item">
               My Account
               </Link>
             }
           </div>
-          <div className="navbar-end">
+          <div className="navbar-end" style={{marginRight: '30px'}}>
             <span className="navbar-item">
               { this.state.user && `Welcome, ${this.state.user.name}` }
             </span>
-            <Link to="/AllCompanies">
-              <button className="button is-rounded ebutton">Search Companies</button>
-            </Link>
+            {
+              this.state.user && <a onClick={this.logout}> <button className="navbar-item button is-rounded ebutton">
+                Log Out </button>
+              </a>
+            }
           </div>
         </div>
       </nav>

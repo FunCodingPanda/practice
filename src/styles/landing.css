@@ -1,3 +1,9 @@
+.about {
+  font-weight: 550;
+  font-size: 80px;
+  font-family: 'Dancing Script', cursive;
+}
+
 .hero.has-carousel {
   position: static !important;
 }

@@ -5,8 +5,10 @@
 
 .box {
   margin-top: 50px;
+  font-size: 18px;
   border-radius: 30px;
   padding: 30px 40px;
+  white-space: pre-wrap;
 }
 
 #ratios {
