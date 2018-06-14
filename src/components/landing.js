@@ -45,9 +45,7 @@ class Landing extends Component {
               </div>
               <div id="navbarMenuHeroA" class="navbar-menu">
                 <div class="navbar-end">
-                  <a class="navbar-item has-text-white is-active">
-                    <b>Home</b>
-                  </a>
+      
                   <span class="navbar-item has-text-white">
                     <a class="button is-link is-inverted is-rounded">
                       <span>Search Companies</span>
@@ -80,10 +78,7 @@ class Landing extends Component {
               <ul>
                 <li class="is-active"><a>About</a></li>
                 <li><a class="has-text-white">Financial Analysis</a></li>
-                <li><a class="has-text-white">Grid</a></li>
-                <li><a class="has-text-white">Elements</a></li>
-                <li><a class="has-text-white">Components</a></li>
-                <li><a class="has-text-white">Layout</a></li>
+                <li><a class="has-text-white">News</a></li>
               </ul>
             </div>
           </nav>
@@ -94,3 +89,7 @@ class Landing extends Component {
 }
 
 export default Landing;
+
+ // <a class="navbar-item has-text-white is-active">
+ //                    <b>Home</b>
+ //                  </a>

@@ -13,6 +13,7 @@ class Account extends Component {
     super(props);
     this.state = {
       company: null,
+      dividend: 0,
       user: { cash: 0 },
       error: null,
       buyModalActive: false,
@@ -87,6 +88,13 @@ class Account extends Component {
           this.setState({
             ratios2: response.data.financials
           })
+        });
+      //get dividends
+      axios.get(`${process.env.REACT_APP_IEX_URL}/stock/${symbol}/dividends/6m`)
+        .then(response => {
+          this.setState({
+            dividend: (response.data.length > 0 ? response.data[0].amount : 0)
+          });
         });
       axios.get(`${process.env.REACT_APP_IEX_URL}/stock/${symbol}/chart/1y`)
         .then(response => {
@@ -236,6 +244,9 @@ class Account extends Component {
                   <p><b>Company:</b> { this.state.company.companyName }</p>
                   <p><b>Symbol:</b> { this.state.company.symbol }</p>
                   <p><b>Latest Price:</b> { this.state.company.latestPrice } USD</p>
+                  <p><b>Dividend:</b> {
+                    this.state.dividend !== 0 ? `${this.state.dividend} USD` : "No Dividend"
+                  }</p>
                   <p><b>Change from Previous Close:</b> { this.state.company.change } USD ({ (100 * this.state.company.changePercent).toFixed(2) }%)</p>
                   <p><b>Return on Equity (ROE):</b> { this.state.ratios && this.state.ratios.returnOnEquity }</p>
                   <p><b>Return on Assets (ROA):</b> { this.state.ratios && this.state.ratios.returnOnAssets }</p>
@@ -270,22 +281,26 @@ class Account extends Component {
                   <h1 className="title">
                     Information on Financial Analysis Ratios
                   </h1>
-                  <p className="subtitle">
+                  <h2 className="subtitle">
                     <b>Profitability Ratios</b>
-                        <p>{'\n'}Return on Equity (ROE, Return on net worth):{'\n'}
-                          <p className='indentation'>Measure of profitability that calculates how many dollars 
-                          of profit a company generates with each dollar of shareholders’ equity{'\n'}{'\n'}
-                        Formula:
-                        ROE = Net Income/ Shareholders Equity
-                          </p> 
+                        <p>Return on Equity (ROE, Return on net worth):{'\n'}
+                           Return on Assets (ROA):{'\n'}
                         </p>
                     
-                  </p>
+                  </h2>
                   <h2 className="subtitle">
                     <b>Operating Management Ratios </b>
+                      <p>Gross Profit Margin:{'\n'}
+                         Earnings Before Interest and Tax:{'\n'}
+                         Earnings Before Interest, Tax, Depreciation and Amortization:{'\n'}
+                         Net Profit Margin:{'\n'}
+                          </p>
                   </h2>
                   <h2 className="subtitle">
                     <b>Leverage and Liquidity Ratios </b>
+                      <p>Current Ratio:{'\n'}
+                         Debt-to-Equity:{'\n'}
+                      </p>
                   </h2>
                 </div>
               </div>
